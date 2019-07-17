@@ -15,6 +15,8 @@ public class Procurator {
     @Column(length = 50,nullable = false)
     private String name;
 
+    @Column(name = "procuratorate_id",nullable = true)
+    private Integer procuratorateId;
     public Procurator(String name) {
         this.name = name;
     }
