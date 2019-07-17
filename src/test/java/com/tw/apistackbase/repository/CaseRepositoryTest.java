@@ -56,4 +56,18 @@ public class CaseRepositoryTest {
         //then
         Assertions.assertEquals("kill",Acase.getName());
     }
+
+    @Test
+    public void should_delete_case_by_id() {
+        //given
+        int id=1;
+        caseRepository.saveAndFlush(new Case("kill",1111L));
+        caseRepository.saveAndFlush(new Case("fire",112211L));
+
+        //when
+        caseRepository.deleteById(id);
+        //then
+        List<Case> caseList=caseRepository.findAll();
+        Assertions.assertEquals(1,caseList.size());
+    }
 }
