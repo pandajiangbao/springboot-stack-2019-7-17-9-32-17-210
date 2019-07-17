@@ -44,4 +44,16 @@ public class CaseRepositoryTest {
         Assertions.assertSame(2,caseList.size());
     }
 
+    @Test
+    public void should_return_case_when_select_by_name() {
+        //given
+        String name="kill";
+        caseRepository.saveAndFlush(new Case("kill",1111L));
+        caseRepository.saveAndFlush(new Case("fire",112211L));
+
+        //when
+        Case Acase=caseRepository.findByName(name);
+        //then
+        Assertions.assertEquals("kill",Acase.getName());
+    }
 }
