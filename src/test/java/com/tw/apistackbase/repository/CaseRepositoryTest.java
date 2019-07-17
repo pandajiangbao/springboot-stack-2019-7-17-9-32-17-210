@@ -71,6 +71,7 @@ public class CaseRepositoryTest {
         List<Case> caseList=caseRepository.findAll();
         Assertions.assertEquals(1,caseList.size());
     }
+
     @Test
     public void should_one_to_one_correspondence() {
         //given
@@ -81,5 +82,21 @@ public class CaseRepositoryTest {
         List<Case> caseList=caseRepository.findAll();
         //then
         Assertions.assertEquals("kill",caseList.get(0).getInfo().getSubjective());
+    }
+
+    @Test
+    public void should_add_case_info_in_criminal_case() {
+        //given
+        Case ACase=new Case("kill",1111L,new CaseInfo("kill","sharen"));
+        Case BCase=new Case("slander",1111L);
+
+        //when
+        caseRepository.saveAndFlush(ACase);
+        caseRepository.saveAndFlush(BCase);
+
+        //then
+        List<Case> caseList=caseRepository.findAll();
+        Assertions.assertEquals("kill",caseList.get(0).getInfo().getSubjective());
+        Assertions.assertNull(caseList.get(1).getInfo());
     }
 }
