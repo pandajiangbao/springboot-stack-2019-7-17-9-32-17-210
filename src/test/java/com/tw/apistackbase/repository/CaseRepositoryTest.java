@@ -43,4 +43,5 @@ public class CaseRepositoryTest {
         //then
         Assertions.assertSame(2,caseList.size());
     }
+
 }
