@@ -2,6 +2,7 @@ package com.tw.apistackbase.repository;
 
 import com.tw.apistackbase.entity.Case;
 import com.tw.apistackbase.entity.CaseInfo;
+import com.tw.apistackbase.entity.Procuratorate;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
@@ -73,7 +74,7 @@ public class CaseRepositoryTest {
     }
 
     @Test
-    public void should_one_to_one_correspondence() {
+    public void should_case_info_one_to_one_correspondence() {
         //given
         caseRepository.saveAndFlush(new Case("kill",1111L,new CaseInfo("kill","sharen")));
         caseRepository.saveAndFlush(new Case("fire",112211L,new CaseInfo("fire","fanghuo")));
@@ -98,5 +99,16 @@ public class CaseRepositoryTest {
         List<Case> caseList=caseRepository.findAll();
         Assertions.assertEquals("kill",caseList.get(0).getInfo().getSubjective());
         Assertions.assertNull(caseList.get(1).getInfo());
+    }
+
+    @Test
+    public void should_procuratorate_one_to_one_correspondence() {
+        //given
+        caseRepository.saveAndFlush(new Case("kill",1111L,new Procuratorate("didian1")));
+        caseRepository.saveAndFlush(new Case("kill",1111L,new Procuratorate("didian2")));
+        //when
+        List<Case> caseList=caseRepository.findAll();
+        //then
+        Assertions.assertEquals("didian1",caseList.get(0).getProcuratorate().getName());
     }
 }
