@@ -111,4 +111,17 @@ public class CaseRepositoryTest {
         //then
         Assertions.assertEquals("didian1",caseList.get(0).getProcuratorate().getName());
     }
+
+    @Test
+    public void should_add_procuratorate_in_criminal_case() {
+        //given
+        Case case1=new Case("kill",1111L,new Procuratorate("didian1"));
+
+        //when
+        caseRepository.saveAndFlush(case1);
+
+        //then
+        List<Case> caseList=caseRepository.findAll();
+        Assertions.assertEquals("didian1",caseList.get(0).getProcuratorate().getName());
+    }
 }
