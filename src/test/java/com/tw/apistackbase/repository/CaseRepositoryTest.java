@@ -1,6 +1,7 @@
 package com.tw.apistackbase.repository;
 
 import com.tw.apistackbase.entity.Case;
+import com.tw.apistackbase.entity.CaseInfo;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
@@ -69,5 +70,16 @@ public class CaseRepositoryTest {
         //then
         List<Case> caseList=caseRepository.findAll();
         Assertions.assertEquals(1,caseList.size());
+    }
+    @Test
+    public void should_one_to_one_correspondence() {
+        //given
+        caseRepository.saveAndFlush(new Case("kill",1111L,new CaseInfo("kill","sharen")));
+        caseRepository.saveAndFlush(new Case("fire",112211L,new CaseInfo("fire","fanghuo")));
+
+        //when
+        List<Case> caseList=caseRepository.findAll();
+        //then
+        Assertions.assertEquals("kill",caseList.get(0).getInfo().getSubjective());
     }
 }

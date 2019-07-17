@@ -16,9 +16,18 @@ public class Case {
     private String name;
     @Column(nullable = false)
     private Long time;
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "info_id", referencedColumnName = "id")
+    private CaseInfo info;
 
     public Case(String name, Long time) {
         this.name = name;
         this.time = time;
+    }
+
+    public Case(String name, Long time, CaseInfo info) {
+        this.name = name;
+        this.time = time;
+        this.info = info;
     }
 }
