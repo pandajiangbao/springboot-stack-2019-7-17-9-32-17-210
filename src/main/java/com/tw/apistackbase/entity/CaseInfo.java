@@ -1,24 +1,24 @@
 package com.tw.apistackbase.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
 @Data
 @NoArgsConstructor
 @Entity
-public class Case {
+public class CaseInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column(nullable = false)
-    private String name;
+    private String subjective;
     @Column(nullable = false)
-    private Long time;
+    private String objectivity;
 
-    public Case(String name, Long time) {
-        this.name = name;
-        this.time = time;
+    public CaseInfo(String subjective, String objectivity) {
+        this.subjective = subjective;
+        this.objectivity = objectivity;
     }
 }
